@@ -5,15 +5,7 @@ from .models import Post
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
-    
-    def get_profile_image(self, obj):
-        default_image = "default_profile_-_coding_gmxlr4"
-        if obj.owner.profile.image:
-            return obj.owner.profile.image
-        else:
-            return cloudinary.CloudinaryImage(default_image).build_url()
-
-    profile_image = serializers.SerializerMethodField()
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
 
     def get_is_owner(self, obj):
         request = self.context.get('request')
