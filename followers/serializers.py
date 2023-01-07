@@ -9,11 +9,14 @@ class FollowerSerializer(serializers.Serializer):
 
     class Meta:
         model = Follower
-        fields = ['owner', 'followed_name']
+        fields = [
+            'id', 'owner', 'created_at', 'followed', 'followed_name'
+        ]
 
     def create(self, validated_data):
         try:
-            follower = Follower.objects.create(**validated_data)
+            return super().create(validated_data)
         except IntegrityError:
-            raise serializers.ValidationError("Follower already exists")
-        return follower
+            raise serializers.ValidationError(
+                {'detail': 'possible duplicate'}
+            )
