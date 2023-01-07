@@ -3,7 +3,7 @@ from .models import Follower
 from django.db import IntegrityError
 
 
-class FollowerSerializer(serializers.Serializer):
+class FollowerSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     followed_name = serializers.ReadOnlyField(source='followed.username')
 
@@ -15,6 +15,7 @@ class FollowerSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         try:
+            # Call the create() method of the parent class
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError(
