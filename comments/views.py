@@ -12,7 +12,6 @@ class CommentList(generics.ListCreateAPIView):
     ]
     queryset = Comment.objects.all()
     filter_backends = [
-        filters.OrderingFilter,
         DjangoFilterBackend
     ]
     filterset_fields = [
