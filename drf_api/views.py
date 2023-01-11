@@ -12,7 +12,8 @@ def root_route(request):
         "message": "Welcome to the DRF API :)"
     })
 
-#dj-rest-auth logout view fix
+
+# dj-rest-auth logout view fix
 @api_view(['POST'])
 def logout_route(request):
     response = Response()
@@ -32,6 +33,6 @@ def logout_route(request):
         expires='Thu, -1 Jan 1970 00:00:00 GMT',
         max_age=0,
         samesite=JWT_AUTH_SAMESITE,
-        secure=JW_AUTH_SECURE,        
+        secure=JW_AUTH_SECURE,
     )
     return response
