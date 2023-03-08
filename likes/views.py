@@ -31,6 +31,7 @@ class LikeDetail(generics.RetrieveDestroyAPIView):
         # Check if the Like object still exists
         try:
             existing_like = Like.objects.get(owner=like.owner, post=like.post)
+            print('deleted like')
             # The Like object still exists, so we should delete it
             existing_like.delete()
         except Like.DoesNotExist:
